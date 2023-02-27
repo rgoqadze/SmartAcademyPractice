@@ -19,6 +19,7 @@ public class CartPage {
         itemPlusButton = $(".fa-plus",0),
         itemMinusButton = $(".fa-minus",0),
         cartRemove = $(byText("კალათის გასუფთავება")),
+        continueButton = $(".continue"),
         emptyCart = $(".emptyCart");
 
      public ElementsCollection

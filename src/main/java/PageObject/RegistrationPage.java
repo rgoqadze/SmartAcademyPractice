@@ -9,12 +9,12 @@ public class RegistrationPage {
     public SelenideElement
         continueButton = $(".continue"),
         iurTab = $("#pis"),
-        pisTab = $("#pis"),
+        pisTab = $("#iur"),
         sendButton = $("#btn2"),
         companyNameInput = $(byAttribute("placeholder", "კომპანიის სახელწოდება")),
-        personalUIDInput = $(".prs__id"),
+        personalUIDInput = $(".iur-code"),
         addressInput = $(byName("address")),
         phoneInput = $(byName("phone")),
         orderDate = $(byName("date")),
-        emailInput = $(byName("email"));
+        emailInput = $(byAttribute("placeholder","ელ.ფოსტა"));
 }
