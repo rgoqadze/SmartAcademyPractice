@@ -17,11 +17,12 @@ public class CartPage {
         itemPrice = $(By.xpath("//div[@class='prod_price']/span"),0),
         itemFullPrice = $(".fullPriceFor",0),
         itemPlusButton = $(".fa-plus",0),
-        itemMinusButton =$(byAttribute("type","button"),1),
-        itemDeleteButton = $(byAttribute("oncklick","removeProductFromCart(148150)"),0),
-        cartRemove = $(".remove_carts"),
+        itemMinusButton = $(".fa-minus",0),
+        cartRemove = $(byText("კალათის გასუფთავება")),
         emptyCart = $(".emptyCart");
+
      public ElementsCollection
-        addCartButton = $$(".add_cart");
+        addCartButton = $$(".add_cart"),
+        itemDeleteButton = $$(".fa-times");
 
 }

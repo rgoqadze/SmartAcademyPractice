@@ -1,26 +1,26 @@
 import PageObject.CartPage;
 import StepObject.CartPageSteps;
 import StepObject.SearchPageSteps;
+import Utils.Retry;
 import Utils.Runner;
 import com.codeborne.selenide.Condition;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import org.testng.asserts.Assertion;
-
-import java.time.Duration;
-
 import static DataObject.SearchPageData.keywordValue;
+import static com.codeborne.selenide.Selenide.refresh;
 import static com.codeborne.selenide.Selenide.sleep;
 
+@Listeners(Utils.TestLister.class)
 public class CartPageTests extends Runner {
     SearchPageSteps add = new SearchPageSteps();
     CartPageSteps steps = new CartPageSteps();
     CartPage element = new CartPage();
 
-    @Test(priority = 0)
+    @Test(retryAnalyzer = Retry.class, priority = 0)
     @Severity(SeverityLevel.CRITICAL)
     @Description("Add products in to card")
     public void addProducts() {
@@ -50,6 +50,7 @@ public class CartPageTests extends Runner {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Product code must be visible")
     public void productCodeCheck(){
+
         Assert.assertTrue(element.itemCode.isDisplayed());
     }
 
@@ -57,6 +58,7 @@ public class CartPageTests extends Runner {
     @Severity(SeverityLevel.NORMAL)
     @Description("Product quantity must be visible")
     public void productQuantityCheck(){
+
         Assert.assertTrue(element.itemQuantity.isDisplayed());
     }
 
@@ -64,7 +66,6 @@ public class CartPageTests extends Runner {
     @Severity(SeverityLevel.NORMAL)
     @Description("Product price must be visible")
     public void productPriceCheck(){
-        sleep(3000);
         Assert.assertTrue(element.itemPrice.isDisplayed());
     }
 
@@ -77,11 +78,40 @@ public class CartPageTests extends Runner {
 
     @Test(priority = 6)
     @Severity(SeverityLevel.NORMAL)
-    @Description("Increased produqt quantiti and prices should increase ")
-    public void QuantityIncreaseCheck(){
+    @Description("Increased product quantity and prices should increase ")
+    public void quantityIncreaseCheck(){
         steps
                 .increaseQuantity();
+        Assert.assertEquals(Float.parseFloat(element.itemPrice.getText()) * 2, Float.parseFloat(element.itemFullPrice.getText()));
     }
 
+    @Test(priority = 7)
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Decrease product quantity and prices should increase ")
+    public void decreaseQuantityCheck(){
+        steps
+                .decreaseQuantity();
+        Assert.assertEquals(Float.parseFloat(element.itemFullPrice.getText()), Float.parseFloat(element.itemFullPrice.getText()));
+    }
 
+    @Test(priority = 8)
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Remove one item and Check")
+    public void itemRemoveCheck(){
+        int itemCount = element.itemDeleteButton.size();
+        steps
+                .removeOneItem();
+        refresh();
+        Assert.assertEquals(itemCount -1,element.itemDeleteButton.size());
+    }
+
+    @Test(priority = 9)
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Remove all item and Check")
+    public void allItemRemoveCheck(){
+        steps
+                .removeAllItem();
+        Assert.assertTrue(element.emptyCart.isDisplayed());
+        Assert.assertFalse(element.cartRemove.isDisplayed());
+    }
 }
