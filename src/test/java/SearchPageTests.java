@@ -7,17 +7,18 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import java.time.Duration;
 
 import static DataObject.SearchPageData.*;
-import static com.codeborne.selenide.Selenide.sleep;
 
-
+@Listeners(Utils.TestLister.class)
 public class SearchPageTests extends Runner {
     SearchPage elements = new SearchPage();
     SearchPageSteps steps = new SearchPageSteps();
+
+
     @Test(priority = 0)
     @Severity(SeverityLevel.CRITICAL)
     @Description("Search button check")
