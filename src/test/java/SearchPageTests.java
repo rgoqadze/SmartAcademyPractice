@@ -21,7 +21,7 @@ public class SearchPageTests extends Runner {
 
     @Test(priority = 0)
     @Severity(SeverityLevel.CRITICAL)
-    @Description("Search button check")
+    @Description("Search button check , TestCase #1")
     public void ClickSearchButton() {
 
     steps
@@ -29,7 +29,7 @@ public class SearchPageTests extends Runner {
 }
     @Test(priority = 1)
     @Severity(SeverityLevel.CRITICAL)
-    @Description("Search keyword check")
+    @Description("Search keyword check, TestCase #2")
     public void checkSearch() {
         steps.KeywordSearch(keywordValue);
         Assert.assertEquals(elements.keywordValueCheck.getText().replace("'",""), SearchPageData.keywordValue);
@@ -37,6 +37,7 @@ public class SearchPageTests extends Runner {
     }
 
     @Test(priority = 2)
+    @Description("Add product to cart, TestCase #3")
     public void addProductToCart() {
         steps
                 .addCardAndCheck();
@@ -47,7 +48,7 @@ public class SearchPageTests extends Runner {
 
     @Test(priority = 4)
     @Severity(SeverityLevel.CRITICAL)
-    @Description("Wrong keyword search check")
+    @Description("Wrong keyword search check, TestCase #4")
     public void checkSearchNegative() {
         steps
                 .clickSearchButton()

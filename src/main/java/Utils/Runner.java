@@ -10,6 +10,6 @@ public class Runner {
         Configuration.browser = "Chrome";
         Configuration.browserSize = "1920x1080";
         Configuration.timeout = 20000;
-        open("https://officemart.ge/ge");
+        open("https://officemart.ge");
     }
 }
